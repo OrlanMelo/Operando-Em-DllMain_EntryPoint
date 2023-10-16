@@ -23,7 +23,9 @@ public:
 
 		Snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 		if (Snapshot == INVALID_HANDLE_VALUE)
+		{
 			cout << "Identificador inválido para o processo selecionado..\n";
+		}
 		else
 		{
 			PROCESSENTRY32 Entrada;
@@ -37,9 +39,13 @@ public:
 				{
 					Identificador = OpenProcess(PROCESS_VM_OPERATION|PROCESS_VM_READ|PROCESS_VM_WRITE, 0, Entrada.th32ProcessID);
 					if (Identificador == NULL)
+					{
 						cout << "Não foi possível prosseguir com a operação..\n";
+					}
 					else
+					{
 						bRetorno = true;
+					}
 				}
 
 			} while (Process32Next(Snapshot, &Entrada));
